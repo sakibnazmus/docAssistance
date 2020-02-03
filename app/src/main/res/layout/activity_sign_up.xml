@@ -11,19 +11,46 @@
         android:layout_height="400dp"
         android:layout_centerInParent="true">
         <TextView
-            android:id="@+id/welcome"
+            android:id="@+id/signUpTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Welcome!"
+            android:text="Sign Up"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="20dp"/>
 
         <EditText
-            android:id="@+id/username"
+            android:id="@+id/firstName"
+            android:layout_width="150dp"
+            android:layout_height="45dp"
+            android:hint="First Name"
+            android:layout_below="@id/signUpTxt"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="30dp"/>
+
+        <EditText
+            android:id="@+id/lastName"
+            android:layout_width="150dp"
+            android:layout_height="45dp"
+            android:hint="Last Name"
+            android:layout_below="@id/signUpTxt"
+            android:layout_toRightOf="@id/firstName"/>
+
+
+        <EditText
+            android:id="@+id/deisredUserName"
             android:layout_width="300dp"
             android:layout_height="45dp"
-            android:layout_below="@id/welcome"
+            android:layout_below="@id/firstName"
             android:hint="username"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="25dp"/>
+
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="300dp"
+            android:layout_height="45dp"
+            android:layout_below="@id/deisredUserName"
+            android:hint="email"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="25dp"/>
 
@@ -31,39 +58,25 @@
             android:id="@+id/password"
             android:layout_width="300dp"
             android:layout_height="45dp"
-            android:layout_below="@id/username"
+            android:layout_below="@id/email"
             android:hint="@string/prompt_password"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="25dp" />
 
-        <Button
-            android:id="@+id/login_as_patient"
-            android:layout_width="150dp"
+        <EditText
+            android:id="@+id/password2"
+            android:layout_width="300dp"
             android:layout_height="45dp"
-            android:text="login as patient"
             android:layout_below="@id/password"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="30dp"/>
+            android:hint="Reenter password"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="25dp"/>
 
-        <Button
-            android:layout_width="150dp"
-            android:layout_height="45dp"
-            android:text="login as doctor"
-            android:layout_below="@id/password"
-            android:layout_toRightOf="@id/login_as_patient"/>
-
-        <TextView
-            android:id="@+id/no_account"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_below="@id/login_as_patient"
-            android:gravity="center"
-            android:text="Don't have an account?"/>
         <Button
             android:id="@+id/signUpBtn"
             android:layout_width="100dp"
             android:layout_height="40dp"
-            android:layout_below="@id/no_account"
+            android:layout_below="@id/password2"
             android:text="Sign Up"
             android:gravity="center"
             android:layout_centerHorizontal="true"/>
