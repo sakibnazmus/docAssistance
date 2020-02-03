@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_centerInParent="true">
+        <TextView
+            android:id="@+id/welcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Welcome!"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="20dp"/>
+
+        <EditText
+            android:id="@+id/username"
+            android:layout_width="300dp"
+            android:layout_height="45dp"
+            android:layout_below="@id/welcome"
+            android:hint="username"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="25dp"/>
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="300dp"
+            android:layout_height="45dp"
+            android:layout_below="@id/username"
+            android:hint="@string/prompt_password"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="25dp" />
+
+        <Button
+            android:id="@+id/login_as_patient"
+            android:layout_width="150dp"
+            android:layout_height="45dp"
+            android:text="login as patient"
+            android:layout_below="@id/password"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="30dp"/>
+
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="45dp"
+            android:text="login as doctor"
+            android:layout_below="@id/password"
+            android:layout_toRightOf="@id/login_as_patient"/>
+
+        <TextView
+            android:id="@+id/no_account"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_below="@id/login_as_patient"
+            android:gravity="center"
+            android:text="Don't have an account?"/>
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_below="@id/no_account"
+            android:text="Sign Up"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"/>
+
+
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

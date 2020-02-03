@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "167065382924",
+    "firebase_url": "https://docassistance-4374f.firebaseio.com",
+    "project_id": "docassistance-4374f",
+    "storage_bucket": "docassistance-4374f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:167065382924:android:9141014e28e29f2c1bfe29",
+        "android_client_info": {
+          "package_name": "com.example.docassistance"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "167065382924-1c9l7hvr1anbjbu8afihuv6e7tsrb5a9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOCQ3No_xRPHOdLt-Ooju5CPoOs6--hJY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "167065382924-1c9l7hvr1anbjbu8afihuv6e7tsrb5a9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
