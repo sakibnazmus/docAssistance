@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PrescriptionPatientInfo">
+
+    <TextView
+        android:id="@+id/enterText"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:gravity="center"
+        android:text="Enter Patient Info"
+        android:textColor="#000000"
+        android:textSize="30sp"/>
+
+    <EditText
+        android:id="@+id/patientFirstName"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:hint="First Name"
+        android:layout_below="@id/enterText"/>
+
+    <EditText
+        android:id="@+id/patientLastName"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:hint="Last Name"
+        android:layout_toRightOf="@id/patientFirstName"
+        android:layout_below="@id/enterText"/>
+
+    <EditText
+        android:id="@+id/patientAge"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:inputType="numberDecimal"
+        android:layout_below="@id/patientFirstName"
+        />
+
+    <RadioGroup
+        android:id="@+id/patientGender"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:gravity="center"
+        android:layout_below="@id/patientAge"
+        android:orientation="horizontal">
+        <RadioButton
+            android:id="@+id/patientIsMale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Male" />
+
+        <RadioButton
+            android:id="@+id/patientIsFemale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Female"/>
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/patientPhoneNo"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Mobule No."
+        android:layout_below="@id/patientGender"/>
+
+    <Button
+        android:id="@+id/patientNext"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:text="Next"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/patientPhoneNo"/>
+
+</RelativeLayout>
