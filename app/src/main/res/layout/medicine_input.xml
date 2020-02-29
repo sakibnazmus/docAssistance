@@ -2,33 +2,43 @@
 <LinearLayout
     android:id="@+id/medicineInput"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="30dp"
+    android:layout_marginRight="30dp">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
 
         <TextView
-            android:layout_width="200dp"
-            android:layout_height="45dp"
-            android:text="Medicine"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Medicine"
+            android:layout_marginRight="15dp"
+            />
 
         <EditText
             android:id="@+id/medicine"
-            android:layout_width="200dp"
-            android:layout_height="45dp"/>
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:hint="medicine"/>
 
         <TextView
-            android:layout_width="150dp"
-            android:layout_height="45dp"
-            android:text="Days"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Days"
+            android:hint="input days"
+            android:layout_marginRight="15dp"/>
 
         <EditText
             android:id="@+id/medicineDays"
             android:layout_width="50dp"
-            android:layout_height="45dp"
+            android:layout_height="wrap_content"
             android:inputType="number"/>
     </LinearLayout>
 
@@ -40,6 +50,13 @@
     <EditText
         android:id="@+id/medicineComment"
         android:layout_width="match_parent"
-        android:layout_height="100dp"/>
+        android:layout_height="50dp"/>
+
+    <Button
+        android:id="@+id/addMedicine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="add"
+        android:layout_gravity="center"/>
 
 </LinearLayout>

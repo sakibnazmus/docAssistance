@@ -5,28 +5,26 @@
     android:layout_height="match_parent"
     tools:context=".PrescriptionActivity">
 
-    <ScrollView
+    <ListView
         android:id="@+id/prescriptionView"
         android:layout_width="match_parent"
-        android:layout_height="800dp"
-        android:layout_centerVertical="true">
+        android:layout_height="400dp">
 
-        <LinearLayout
-            android:id="@+id/prescriptionLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical" >
+    </ListView>
 
-        </LinearLayout>
-
-    </ScrollView>
+    <include
+        android:id="@+id/prescribe"
+        layout="@layout/medicine_input"
+        android:layout_below="@id/prescriptionView"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent" />
 
     <Button
         android:id="@+id/generatePDF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Generate PDF"
-        android:layout_below="@+id/prescriptionView"
+        android:layout_below="@+id/prescribe"
         android:layout_centerHorizontal="true"
         android:gravity="center"/>
 

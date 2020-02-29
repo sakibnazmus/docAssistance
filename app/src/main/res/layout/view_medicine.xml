@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/medicineName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Medicine Name: "
+        android:layout_marginRight="20dp"/>
+
+    <TextView
+        android:id="@+id/numOfDays"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Days: "
+        android:layout_toRightOf="@id/medicineName"/>
+
+    <TextView
+        android:id="@+id/comment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Comment: "
+        android:layout_below="@id/medicineName"/>
+
+</RelativeLayout>
