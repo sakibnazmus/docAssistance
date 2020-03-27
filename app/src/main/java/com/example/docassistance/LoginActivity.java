@@ -8,12 +8,12 @@ import android.view.View;
 import android.widget.TextView;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
-    TextView signUp;
+    private  TextView signUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
         signUp = findViewById(R.id.text_sign_up);
 
         signUp.setOnClickListener(this);
