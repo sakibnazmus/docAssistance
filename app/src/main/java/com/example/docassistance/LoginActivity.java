@@ -109,6 +109,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
 
         try {
+            pb.setVisibility(View.VISIBLE);
             patientsRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -122,11 +123,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             Toast.makeText(getApplicationContext(),"success:patient",Toast.LENGTH_SHORT).show();
                             flag = false;
                             startActivity(new Intent(LoginActivity.this,WelcomeActivity.class));
+                            finish();
                         }
 
                     }
+                    pb.setVisibility(View.GONE);
                     if(flag){
+                        loginEmail.setText("");
+                        loginPassword.setText("");
                         Toast.makeText(getApplicationContext(),"incorrect email or password",Toast.LENGTH_SHORT).show();
+
                     }
 
                 }
@@ -173,6 +179,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
 
         try {
+            pb.setVisibility(View.VISIBLE);
             doctorsRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -184,10 +191,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             Toast.makeText(getApplicationContext(),"success:doctors",Toast.LENGTH_SHORT).show();
                             flag = false;
                             startActivity(new Intent(LoginActivity.this,WelcomeActivity.class));
+                            finish();
                         }
 
                     }
+                    pb.setVisibility(View.GONE);
                     if(flag){
+                        loginEmail.setText("");
+                        loginPassword.setText("");
                         Toast.makeText(getApplicationContext(),"incorrect email or password",Toast.LENGTH_SHORT).show();
                     }
 
