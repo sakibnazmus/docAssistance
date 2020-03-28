@@ -24,10 +24,10 @@ import com.google.firebase.database.FirebaseDatabase;
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = "tag";
-    private TextView signUpBackActivity;
+    private TextView btnSignUpBackActivity;
     private EditText signUpEmail,signUpUsername,signUpPassword,signUpMobileNumber,signUpAdress;
-    private TextView patientSignUp;
-    private TextView doctorSignUp;
+    private TextView btnPatientSignUp;
+    private TextView btnDoctorSignUp;
     private ProgressBar pb;
 
     private FirebaseAuth mAuth;
@@ -45,21 +45,21 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         patientRef = database.getReference("patients_user");
         doctorRef = database.getReference("doctors_user");
 
-        signUpEmail = findViewById(R.id.edit_email);
+        signUpEmail = findViewById(R.id.edit_email_sign_up);
         signUpUsername = findViewById(R.id.edit_username);
-        signUpPassword = findViewById(R.id.edit_password);
+        signUpPassword = findViewById(R.id.edit_password_sign_up);
         signUpMobileNumber = findViewById(R.id.edit_mobile_number);
         signUpAdress = findViewById(R.id.edit_address);
         pb = findViewById(R.id.progress_sign_up);
 
-        signUpBackActivity = findViewById(R.id.text_login_back_activity);
-        signUpBackActivity.setOnClickListener(this);
+        btnSignUpBackActivity = findViewById(R.id.text_login_back_activity);
+        btnSignUpBackActivity.setOnClickListener(this);
 
-        patientSignUp = findViewById(R.id.text_sign_up_patient);
-        patientSignUp.setOnClickListener(this);
+        btnPatientSignUp = findViewById(R.id.text_sign_up_patient);
+        btnPatientSignUp.setOnClickListener(this);
 
-        doctorSignUp = findViewById(R.id.text_sign_up_doctor);
-        doctorSignUp.setOnClickListener(this);
+        btnDoctorSignUp = findViewById(R.id.text_sign_up_doctor);
+        btnDoctorSignUp.setOnClickListener(this);
     }
 
     @Override
@@ -74,6 +74,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 break;
             case R.id.text_login_back_activity:
                 startActivity(new Intent(SignUpActivity.this,LoginActivity.class));
+                break;
         }
     }
 
