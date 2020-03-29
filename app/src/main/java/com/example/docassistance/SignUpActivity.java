@@ -185,11 +185,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         String mobileNumber = signUpMobileNumber.getText().toString().trim();
         String username = signUpUsername.getText().toString().trim();
 
-
-
         String key = patientRef.push().getKey();
 
-        UsersSignUpModel usersSignUpModel = new UsersSignUpModel(email,password,uid,address,mobileNumber,username);
+        UsersSignUpModel usersSignUpModel = new UsersSignUpModel(email,password,uid,address,mobileNumber,username,key);
 
         patientRef.child(key).setValue(usersSignUpModel);
         Log.d(TAG, "storingPatientsUserSignUpData: "+key+" "+ usersSignUpModel.getEmail()+" "+usersSignUpModel.getPassword());
@@ -306,7 +304,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         String key = patientRef.push().getKey();
 
        // UsersSignUpModel usersSignUpModel = new UsersSignUpModel(email,password,uid);
-        UsersSignUpModel usersSignUpModel = new UsersSignUpModel(email,password,uid,address,mobileNumber,username);
+        UsersSignUpModel usersSignUpModel = new UsersSignUpModel(email,password,uid,address,mobileNumber,username,key);
 
 
 

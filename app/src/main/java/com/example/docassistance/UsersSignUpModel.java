@@ -6,18 +6,20 @@ public class UsersSignUpModel {
     String password;
     String uid;
     String address,phoneNumber,username;
+    String key;
 
     UsersSignUpModel() {
 
     }
 
-    public UsersSignUpModel(String email, String password, String uid, String address, String phoneNumber, String username) {
+    public UsersSignUpModel(String email, String password, String uid, String address, String phoneNumber, String username, String key) {
         this.email = email;
         this.password = password;
         this.uid = uid;
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.username = username;
+        this.key = key;
     }
 
     UsersSignUpModel(String email, String password, String uid){
@@ -74,5 +76,13 @@ public class UsersSignUpModel {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 }
