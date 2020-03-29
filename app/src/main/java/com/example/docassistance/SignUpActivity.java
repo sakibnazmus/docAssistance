@@ -23,7 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private static final String TAG = "tag";
+    private static final String TAG = "SignUpActivity";
     private TextView btnSignUpBackActivity;
     private EditText signUpEmail,signUpUsername,signUpPassword,signUpMobileNumber,signUpAdress;
     private TextView btnPatientSignUp;
@@ -74,6 +74,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 break;
             case R.id.text_login_back_activity:
                 startActivity(new Intent(SignUpActivity.this,LoginActivity.class));
+                finish();
                 break;
         }
     }
@@ -81,7 +82,10 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     private void userPatientsRegistration() {
 
         String email = signUpEmail.getText().toString().trim();
+        String username = signUpUsername.getText().toString().trim();
         String password = signUpPassword.getText().toString().trim();
+        String mobileNumber = signUpMobileNumber.getText().toString().trim();
+        String address = signUpAdress.getText().toString().trim();
 
          //check();
 
@@ -97,6 +101,18 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             return;
         }
 
+
+        if(username.isEmpty()){
+            signUpUsername.setError("Enter an address");
+            signUpUsername.requestFocus();
+            return;
+        }
+        if(username.length()<4){
+            signUpUsername.setError("please Enter username atleast consisting of 3 characters!");
+            signUpUsername.requestFocus();
+            return;
+        }
+
         if(password.isEmpty()){
             signUpPassword.setError("Enter an password!");
             signUpPassword.requestFocus();
@@ -109,6 +125,24 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             return;
         }
 
+        if(mobileNumber.isEmpty()){
+            signUpMobileNumber.setError("Enter a  phone number");
+            signUpMobileNumber.requestFocus();
+            return;
+        }
+
+        if (mobileNumber.length()<11){
+            signUpMobileNumber.setError("Enter a valid phone number");
+            signUpMobileNumber.requestFocus();
+            return;
+        }
+
+        if(address.isEmpty()){
+            signUpAdress.setError("Enter an address");
+            signUpAdress.requestFocus();
+            return;
+        }
+
         pb.setVisibility(View.VISIBLE);
 
         mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -117,8 +151,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 pb.setVisibility(View.GONE);
                 if(task.isSuccessful()){
                     storingPatientsUserSignUpData();
-                    signUpEmail.setText("");
-                    signUpPassword.setText("");
+                    finish();
+                    startActivity(new Intent(SignUpActivity.this,LoginActivity.class));
 
                 }
                 else{
@@ -145,10 +179,17 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
         String email = signUpEmail.getText().toString().trim();
         String password = signUpPassword.getText().toString().trim();
+        String uid = mAuth.getUid();
+
+        String address = signUpAdress.getText().toString().trim();
+        String mobileNumber = signUpMobileNumber.getText().toString().trim();
+        String username = signUpUsername.getText().toString().trim();
+
+
 
         String key = patientRef.push().getKey();
 
-        UsersSignUpModel usersSignUpModel = new UsersSignUpModel(email,password);
+        UsersSignUpModel usersSignUpModel = new UsersSignUpModel(email,password,uid,address,mobileNumber,username);
 
         patientRef.child(key).setValue(usersSignUpModel);
         Log.d(TAG, "storingPatientsUserSignUpData: "+key+" "+ usersSignUpModel.getEmail()+" "+usersSignUpModel.getPassword());
@@ -161,7 +202,10 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     private void userDoctorsRegistration() {
         String email = signUpEmail.getText().toString().trim();
+        String username = signUpUsername.getText().toString().trim();
         String password = signUpPassword.getText().toString().trim();
+        String mobileNumber = signUpMobileNumber.getText().toString().trim();
+        String address = signUpAdress.getText().toString().trim();
 
         if(email.isEmpty()){
             signUpEmail.setError("Enter an Email address! ");
@@ -172,6 +216,18 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
             signUpEmail.setError("Invalid Email Address!");
             signUpEmail.requestFocus();
+            return;
+        }
+
+
+        if(username.isEmpty()){
+            signUpUsername.setError("Enter an address");
+            signUpUsername.requestFocus();
+            return;
+        }
+        if(username.length()<4){
+            signUpUsername.setError("please Enter username atleast consisting of 3 characters!");
+            signUpUsername.requestFocus();
             return;
         }
 
@@ -187,6 +243,24 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             return;
         }
 
+        if(mobileNumber.isEmpty()){
+            signUpMobileNumber.setError("Enter a  phone number");
+            signUpMobileNumber.requestFocus();
+            return;
+        }
+
+        if(mobileNumber.length()<11){
+            signUpMobileNumber.setError("Enter a valid phone number");
+            signUpMobileNumber.requestFocus();
+            return;
+        }
+
+        if(address.isEmpty()){
+            signUpAdress.setError("Enter an address");
+            signUpAdress.requestFocus();
+            return;
+        }
+
         pb.setVisibility(View.VISIBLE);
 
         mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -195,8 +269,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 pb.setVisibility(View.GONE);
                 if(task.isSuccessful()){
                     storingDoctorsUserSignUpData();
-                    signUpEmail.setText("");
-                    signUpPassword.setText("");
+                    finish();
+                    startActivity(new Intent(SignUpActivity.this,LoginActivity.class));
 
                 }
                 else{
@@ -223,10 +297,18 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
         String email = signUpEmail.getText().toString().trim();
         String password = signUpPassword.getText().toString().trim();
+        String uid = mAuth.getUid();
+
+        String address = signUpAdress.getText().toString().trim();
+        String mobileNumber = signUpMobileNumber.getText().toString().trim();
+        String username = signUpUsername.getText().toString().trim();
 
         String key = patientRef.push().getKey();
 
-        UsersSignUpModel usersSignUpModel = new UsersSignUpModel(email,password);
+       // UsersSignUpModel usersSignUpModel = new UsersSignUpModel(email,password,uid);
+        UsersSignUpModel usersSignUpModel = new UsersSignUpModel(email,password,uid,address,mobileNumber,username);
+
+
 
         doctorRef.child(key).setValue(usersSignUpModel);
         Toast.makeText(getApplicationContext(),"success "+key,Toast.LENGTH_LONG)
@@ -234,5 +316,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
 
     }
+
 
 }

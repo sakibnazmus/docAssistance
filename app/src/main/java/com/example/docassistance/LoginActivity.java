@@ -26,7 +26,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.List;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
-    private static final String TAG = "tag";
+    private static final String TAG = "LoginActivity";
     private EditText loginEmail,loginPassword;
     private TextView btnSignUp,btnLoginPatient,btnLoginDoctor;
     private ProgressBar pb;
@@ -43,6 +43,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
         patientsRef = database.getReference("patients_user");
         doctorsRef = database.getReference("doctors_user");
@@ -62,6 +63,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+      /*  if(mAuth.getCurrentUser()!= null){
+            finish();
+            startActivity(new Intent(LoginActivity.this,WelcomeActivity.class));
+        }*/
+    }
+
+    @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.text_login_as_patient:
@@ -72,6 +82,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.text_sign_up:
                 startActivity(new Intent(LoginActivity.this,SignUpActivity.class));
+                finish();
                 break;
         }
     }
@@ -116,14 +127,24 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     boolean flag = true;
                     for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                         UsersSignUpModel usersSignUpModel = dataSnapshot1.getValue(UsersSignUpModel.class);
-                        //Log.d(TAG, "onDataChange: "+usersSignUpModel.getEmail() +" "+email+" "+password);
-                        //Log.d(TAG, "onDataChange: compare: "+email.equals(usersSignUpModel.getEmail()));
-                        //Log.d(TAG, "onDataChange: compare: "+password.equals(usersSignUpModel.getPassword()));
+
                         if (patientEmail.equals(usersSignUpModel.getEmail()) && patientPassword.equals(usersSignUpModel.getPassword())) {
                             Toast.makeText(getApplicationContext(),"success:patient",Toast.LENGTH_SHORT).show();
                             flag = false;
-                            startActivity(new Intent(LoginActivity.this,WelcomeActivity.class));
-                            finish();
+
+                            mAuth.signInWithEmailAndPassword(patientEmail,patientPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if(task.isSuccessful()){
+                                        finish();
+                                        startActivity(new Intent(LoginActivity.this,WelcomeActivity.class));
+                                    }else{
+                                        Toast.makeText(LoginActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+
+                                }
+                            });
+
                         }
 
                     }
@@ -190,8 +211,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         if (doctorEmail.equals(usersSignUpModel.getEmail()) && doctorPassword.equals(usersSignUpModel.getPassword())) {
                             Toast.makeText(getApplicationContext(),"success:doctors",Toast.LENGTH_SHORT).show();
                             flag = false;
-                            startActivity(new Intent(LoginActivity.this,WelcomeActivity.class));
-                            finish();
+
+                            mAuth.signInWithEmailAndPassword(doctorEmail,doctorPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if(task.isSuccessful()){
+                                        finish();
+                                        startActivity(new Intent(LoginActivity.this,WelcomeActivity.class));
+                                    }else{
+                                        Toast.makeText(LoginActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+
+                                }
+                            });
                         }
 
                     }
