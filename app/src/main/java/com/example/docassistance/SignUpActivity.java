@@ -18,8 +18,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Objects;
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -31,6 +34,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     private ProgressBar pb;
 
     private FirebaseAuth mAuth;
+    private FirebaseUser firebaseUser;
     private FirebaseDatabase database;
     private DatabaseReference patientRef,doctorRef;
 
@@ -81,7 +85,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     private void userPatientsRegistration() {
 
-        String email = signUpEmail.getText().toString().trim();
+        final String email = signUpEmail.getText().toString().trim();
         String username = signUpUsername.getText().toString().trim();
         String password = signUpPassword.getText().toString().trim();
         String mobileNumber = signUpMobileNumber.getText().toString().trim();
@@ -150,6 +154,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             public void onComplete(@NonNull Task<AuthResult> task) {
                 pb.setVisibility(View.GONE);
                 if(task.isSuccessful()){
+
                     storingPatientsUserSignUpData();
                     finish();
                     startActivity(new Intent(SignUpActivity.this,LoginActivity.class));
@@ -193,6 +198,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         Log.d(TAG, "storingPatientsUserSignUpData: "+key+" "+ usersSignUpModel.getEmail()+" "+usersSignUpModel.getPassword());
         Toast.makeText(getApplicationContext(),"success "+key,Toast.LENGTH_LONG)
                 .show();
+
 
 
     }

@@ -17,6 +17,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,6 +33,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private ProgressBar pb;
 
     private FirebaseAuth mAuth;
+    private FirebaseUser firebaseUser;
     private FirebaseDatabase database;
     private DatabaseReference patientsRef,doctorsRef;
 
@@ -128,8 +130,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                         UsersSignUpModel usersSignUpModel = dataSnapshot1.getValue(UsersSignUpModel.class);
 
+
                         if (patientEmail.equals(usersSignUpModel.getEmail()) && patientPassword.equals(usersSignUpModel.getPassword())) {
-                            Toast.makeText(getApplicationContext(),"success:patient",Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getApplicationContext(),"success:patient",Toast.LENGTH_SHORT).show();
                             flag = false;
 
                             mAuth.signInWithEmailAndPassword(patientEmail,patientPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -138,6 +141,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     if(task.isSuccessful()){
                                         finish();
                                         startActivity(new Intent(LoginActivity.this,WelcomeActivity.class));
+
                                     }else{
                                         Toast.makeText(LoginActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                     }
