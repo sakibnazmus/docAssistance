@@ -1,19 +1,24 @@
 package com.example.docassistance;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -30,8 +35,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private static final String TAG = "LoginActivity";
     private EditText loginEmail,loginPassword;
     private TextView btnSignUp,btnLoginPatient,btnLoginDoctor;
-    private ProgressBar pb;
+    private TextView forgotPassword;
 
+    private ProgressBar pb;
+    //khanki magi
     private FirebaseAuth mAuth;
     private FirebaseUser firebaseUser;
     private FirebaseDatabase database;
@@ -39,7 +46,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private List<UsersSignUpModel> usersSignUpModelList;
 
-
+    //aikhane email resetting er kajta hoi thik kintu tarporeo login hobena karon login system alada kore korcilam tai kaj hoschena
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +61,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         loginPassword = findViewById(R.id.edit_password_login);
         pb = findViewById(R.id.progress_login);
 
+
+
         btnLoginPatient = findViewById(R.id.text_login_as_patient);
         btnLoginDoctor = findViewById(R.id.text_login_as_doctor);
         btnSignUp = findViewById(R.id.text_sign_up);
@@ -61,6 +70,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         btnLoginPatient.setOnClickListener(this);
         btnLoginDoctor.setOnClickListener(this);
         btnSignUp.setOnClickListener(this);
+
+        forgotPassword = findViewById(R.id.textView_forgot_password);
+        forgotPassword.setOnClickListener(this);
+
+
 
     }
 
@@ -86,7 +100,69 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 startActivity(new Intent(LoginActivity.this,SignUpActivity.class));
                 finish();
                 break;
+            case R.id.textView_forgot_password:
+                showRecoverDialog();
         }
+    }
+
+    private void showRecoverDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Recover Password");
+
+        LinearLayout linearLayout = new LinearLayout(this);
+        final EditText editText = new EditText(this);
+        editText.setHint("Email");
+        editText.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+        editText.setMinEms(16);
+
+        linearLayout.addView(editText);
+        linearLayout.setPadding(10,10,10,10);
+
+        builder.setView(linearLayout);
+
+        builder.setPositiveButton("Recover", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String email = editText.getText().toString().trim();
+
+                beingRecovery(email);
+            }
+
+        });
+
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        builder.create().show();
+
+
+
+    }
+
+    private void beingRecovery(String email) {
+        pb.setVisibility(View.VISIBLE);
+        mAuth.sendPasswordResetEmail(email)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                pb.setVisibility(View.GONE);
+
+                if(task.isSuccessful()){
+                    Toast.makeText(LoginActivity.this, "Email has been send!", Toast.LENGTH_SHORT).show();
+
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
 
@@ -251,5 +327,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
     }
+
 
 }
