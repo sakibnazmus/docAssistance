@@ -85,6 +85,8 @@ public class VerifyPhoneActivity extends AppCompatActivity {
                     if(code != null){
                         editTextCode.setText(code);
                         verifyVerficationCode(code);
+                    } else {
+                        signInWithPhoneAuthCredential(phoneAuthCredential);
                     }
                 }
 
