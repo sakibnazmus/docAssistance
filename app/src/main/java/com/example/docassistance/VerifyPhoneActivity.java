@@ -61,6 +61,7 @@ public class VerifyPhoneActivity extends AppCompatActivity {
     }
 
 
+
     private void sendVerificationCode(String mobile) {
         String mobileWithCountryCode  = "+88" + mobile;
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
@@ -140,5 +141,7 @@ public class VerifyPhoneActivity extends AppCompatActivity {
                 }
             }
         });
+
+        Log.d(TAG, "signInWithPhoneAuthCredential: currentUser: "+ mAuth.getCurrentUser() + " "+mAuth.getUid());
     }
 }
