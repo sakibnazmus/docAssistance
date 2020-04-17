@@ -24,7 +24,7 @@ public class LoginActivity extends AppCompatActivity {
         editTextMobile = findViewById(R.id.editTextMobile);
 
         if(mAuth.getCurrentUser()!=null){
-            startActivity(new Intent(getApplicationContext(),ProfileActivity.class));
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
             Log.d(TAG, "onCreate: "+ mAuth.getCurrentUser());
             finish();
         }
