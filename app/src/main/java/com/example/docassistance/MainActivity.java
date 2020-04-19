@@ -3,13 +3,16 @@ package com.example.docassistance;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -34,6 +37,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ActionBarDrawerToggle mToggle = new ActionBarDrawerToggle(this,drawerLayout,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
         mToggle.syncState();
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu);
 
@@ -60,10 +65,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.navProfile:
                 navView.setCheckedItem(R.id.navProfile);
                 fragment = new ProfileFragment();
+               /* Bundle data = new Bundle();
+                data.putString("mobile",mobile);
+                fragment.setArguments(data);*/
                 break;
             case R.id.navLogout:
                 navView.setCheckedItem(R.id.navLogout);
-                Toast.makeText(this, "Logout", Toast.LENGTH_SHORT).show();
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(MainActivity.this,LoginActivity.class));
                 break;
             case R.id.navSetting:
                 navView.setCheckedItem(R.id.navSetting);

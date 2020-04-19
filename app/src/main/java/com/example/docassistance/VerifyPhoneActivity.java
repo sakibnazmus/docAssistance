@@ -30,6 +30,8 @@ public class VerifyPhoneActivity extends AppCompatActivity {
     private String mVerificationId;
     private FirebaseAuth mAuth;
 
+    private String mobile;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +41,7 @@ public class VerifyPhoneActivity extends AppCompatActivity {
         editTextCode = findViewById(R.id.editTextCode);
 
         Intent intent = getIntent();
-        String mobile = intent.getStringExtra("mobile");
+        mobile = intent.getStringExtra("mobile");
         sendVerificationCode(mobile);
 
         findViewById(R.id.buttonSignIn).setOnClickListener(new View.OnClickListener() {
@@ -123,6 +125,7 @@ public class VerifyPhoneActivity extends AppCompatActivity {
                 if(task.isSuccessful()){
                     Intent intent = new Intent(VerifyPhoneActivity.this, MainActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    intent.putExtra("mobile",mobile);
                     startActivity(intent);
                 }else{
                     String messege = "something is wrong we will fix it soon...";

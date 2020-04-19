@@ -1,26 +1,33 @@
 package com.example.docassistance;
 
 public class UserModel {
-    String email,password,name,age,key,userId;
+   String fullName,email,gender,dateOfBirth,userUID,address;
 
+   UserModel(){
 
-    UserModel(){};
+   }
 
-    UserModel(String email, String password){
+    public UserModel(String fullName, String email, String gender, String dateOfBirth, String userUID) {
+        this.fullName = fullName;
         this.email = email;
-        this.password = password;
-    }
-    UserModel(String name,String age,String key){
-        this.name = name;
-        this.age= age;
-        this.key = key;
+        this.gender = gender;
+        this.dateOfBirth = dateOfBirth;
+        this.userUID = userUID;
     }
 
-    public UserModel(String name, String age, String key, String userId) {
-        this.name = name;
-        this.age = age;
-        this.key = key;
-        this.userId = userId;
+    public UserModel(String fullName, String email,String address, String userUID) {
+        this.fullName = fullName;
+        this.email = email;
+        this.address = address;
+        this.userUID = userUID;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getEmail() {
@@ -31,43 +38,27 @@ public class UserModel {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getGender() {
+        return gender;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
-    public String getKey() {
-        return key;
+    public String getDateOfBirth() {
+        return dateOfBirth;
     }
 
-    public void setKey(String key) {
-        this.key = key;
+    public void setDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
-    public String getName() {
-        return name;
+    public String getUserUID() {
+        return userUID;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAge() {
-        return age;
-    }
-
-    public void setAge(String age) {
-        this.age = age;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUserUID(String userUID) {
+        this.userUID = userUID;
     }
 }
